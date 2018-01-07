@@ -10,6 +10,9 @@
 #import "RDCryto.h"
 #import "RDExchangeRate.h"
 #import "RDApiRateManager.h"
+#import "RDLunoRate.h"
+#import "RDMarketCap.h"
+#import "RDApiCryptoManager.h"
 
 
 
@@ -19,6 +22,10 @@
     double exchanceRate;
     double originalExchanceRate;
      double totalPrimaryInvestment;
+    UILabel * lunoBTCRateLabel ;
+    UILabel * lunoETHRateLabel ;
+     RDLunoRate * lunoBTCRate ;
+     RDLunoRate * lunoETHRate ;
 }
 
 
@@ -31,15 +38,28 @@
 
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (void)loadView {
+    [super loadView];
     
     originalExchanceRate = 12.4;
     totalPrimaryInvestment = 0;
     // Do any additional setup after loading the view, typically from a nib.
     
+    
+     lunoBTCRateLabel = [[UILabel alloc]init];
+    lunoBTCRateLabel.frame = CGRectMake(0, 90, [UIScreen mainScreen].bounds.size.width, 20);
+    lunoBTCRateLabel.textAlignment = NSTextAlignmentCenter;
+    lunoBTCRateLabel.textColor = [UIColor cyanColor];
+    [self.view addSubview:lunoBTCRateLabel];
+    
+    lunoETHRateLabel = [[UILabel alloc]init];
+    lunoETHRateLabel.textAlignment = NSTextAlignmentCenter;
+     lunoETHRateLabel.textColor = [UIColor magentaColor];
+    lunoETHRateLabel.frame = CGRectMake(0, 120, [UIScreen mainScreen].bounds.size.width, 20);
+    [self.view addSubview:lunoETHRateLabel];
+    
 
-     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 60, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height-60) style:UITableViewStylePlain];
+     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, [UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height-160) style:UITableViewStylePlain];
         tableView.rowHeight = 56;
     
     [tableView setAutoresizesSubviews:YES];
@@ -56,8 +76,70 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cryptos:) name:@"cryptos" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rates:) name:@"rates" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(marketCap:) name:@"marketCap" object:nil];
+
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lunoRate:) name:@"lunoRate" object:nil];
+
+}
 
 
+-(void)marketCap:(NSNotification*)notification
+{
+    NSDictionary * note = [notification userInfo];
+    
+    
+   // (D27-C27)/C27*100
+    
+    if (note[@"marketCap"]) {
+        
+        NSDictionary *dic = note[@"marketCap"];
+        
+        NSLog(@"dic %@",dic);
+        //lunoBTCRateLabel.text =  [NSString stringWithFormat:@"R%.2f",[rate.last_trade doubleValue] ];
+        if (dic[@"ETH"]) {
+            RDMarketCap *marketCap = dic[@"ETH"];
+            
+            double premium =   (([lunoETHRate.last_trade doubleValue]*[lunoBTCRate.last_trade doubleValue] ) -   exchanceRate * [marketCap.price_usd doubleValue])/(exchanceRate * [marketCap.price_usd doubleValue])*100;
+            
+             lunoETHRateLabel.text =  [NSString stringWithFormat:@"R %.2f  (%.2f)  ETH",[lunoBTCRate.last_trade doubleValue] *[lunoETHRate.last_trade doubleValue] ,premium];
+        }
+        
+        if (dic[@"BTC"]) {
+            RDMarketCap *marketCap = dic[@"BTC"];
+            
+            
+            double premium =   (([lunoBTCRate.last_trade doubleValue] ) -   exchanceRate * [marketCap.price_usd doubleValue])/(exchanceRate * [marketCap.price_usd doubleValue])*100;
+            
+            lunoBTCRateLabel.text =  [NSString stringWithFormat:@"R %.2f  (%.2f)  BTC",[lunoBTCRate.last_trade doubleValue] ,premium];
+            
+            
+        }
+    }
+  
+    
+}
+
+
+-(void)lunoRate:(NSNotification*)notification
+{
+    NSDictionary * note = [notification userInfo];
+   
+   
+    
+    if (note[@"XBTZAR"]) {
+          lunoBTCRate = note[@"XBTZAR"];
+       // lunoBTCRateLabel.text =  [NSString stringWithFormat:@"R%.2f",[lunoBTCRate.last_trade doubleValue] ];
+
+    }
+    if (note[@"ETHXBT"]) {
+          lunoETHRate = note[@"ETHXBT"];
+        //lunoETHRateLabel.text =  [NSString stringWithFormat:@"R%.2f",[lunoBTCRate.last_trade doubleValue] *[lunoETHRate.last_trade doubleValue] ];
+        
+          [RDApiCryptoManager fetchMarketCap];
+
+    }
+       // self.title = [NSString stringWithFormat:@"R%.2f",[rate.last_trade doubleValue] ];
+  
 }
 
 
@@ -89,7 +171,7 @@
         NSLog(@"totalPrimaryInvestment %f",totalPrimaryInvestment);
     }
     
-   // self.title = [NSString stringWithFormat:@"R%.2f",totalPrimaryInvestment-65000];
+    self.title = [NSString stringWithFormat:@"R%.2f",totalPrimaryInvestment-65000];
     
     
      [RDApiRateManager fetchExchangeRates];
@@ -128,7 +210,7 @@
     }
     else
          cell.detailTextLabel.textColor = [UIColor redColor];
-        
+    
    
     
     return cell;

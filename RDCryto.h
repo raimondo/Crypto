@@ -11,6 +11,8 @@
 @interface RDCryto : NSObject
 
 
+
+
 @property (nonatomic, copy) NSString* symbol;
 
 @property (nonatomic, copy) NSString* price;

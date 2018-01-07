@@ -25,6 +25,8 @@
 		71CF841F2000F1A8009F5D27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF841E2000F1A7009F5D27 /* main.m */; };
 		71CF84232000F3C4009F5D27 /* Info.plist in Sources */ = {isa = PBXBuildFile; fileRef = 71CF84222000F3C4009F5D27 /* Info.plist */; };
 		71CF84282000F6ED009F5D27 /* RDApiCryptoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF84272000F6ED009F5D27 /* RDApiCryptoManager.m */; };
+		71CF842C20026B6F009F5D27 /* RDLunoRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF842B20026B6F009F5D27 /* RDLunoRate.m */; };
+		71CF842F2002814E009F5D27 /* RDMarketCap.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF842E2002814D009F5D27 /* RDMarketCap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,10 @@
 		71CF84262000F6ED009F5D27 /* RDApiCryptoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDApiCryptoManager.h; sourceTree = "<group>"; };
 		71CF84272000F6ED009F5D27 /* RDApiCryptoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDApiCryptoManager.m; sourceTree = "<group>"; };
 		71CF84292000F83C009F5D27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		71CF842A20026B6F009F5D27 /* RDLunoRate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDLunoRate.h; sourceTree = "<group>"; };
+		71CF842B20026B6F009F5D27 /* RDLunoRate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDLunoRate.m; sourceTree = "<group>"; };
+		71CF842D2002814D009F5D27 /* RDMarketCap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDMarketCap.h; sourceTree = "<group>"; };
+		71CF842E2002814D009F5D27 /* RDMarketCap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDMarketCap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +83,16 @@
 				71CF84142000F140009F5D27 /* RDApiRateManager.h */,
 				71CF84152000F141009F5D27 /* RDApiRateManager.m */,
 				71CF840F2000F13F009F5D27 /* RDCryto.h */,
-				71CF83F92000F0E9009F5D27 /* AppDelegate.h */,
 				71CF84162000F141009F5D27 /* RDCryto.m */,
+				71CF842D2002814D009F5D27 /* RDMarketCap.h */,
+				71CF842E2002814D009F5D27 /* RDMarketCap.m */,
+				71CF842A20026B6F009F5D27 /* RDLunoRate.h */,
+				71CF842B20026B6F009F5D27 /* RDLunoRate.m */,
 				71CF840D2000F13E009F5D27 /* RDExchangeRate.h */,
 				71CF84112000F13F009F5D27 /* RDExchangeRate.m */,
 				71CF840E2000F13E009F5D27 /* ViewController.h */,
 				71CF84172000F142009F5D27 /* ViewController.m */,
+				71CF83F92000F0E9009F5D27 /* AppDelegate.h */,
 				71CF84012000F0EC009F5D27 /* AppDelegate.m */,
 				71CF83FD2000F0EB009F5D27 /* Assets.xcassets */,
 				71CF83F82000F0E9009F5D27 /* Base.lproj */,
@@ -177,6 +187,7 @@
 			files = (
 				71CF84232000F3C4009F5D27 /* Info.plist in Sources */,
 				71CF840A2000F0ED009F5D27 /* RDApiRateManager.h in Sources */,
+				71CF842F2002814E009F5D27 /* RDMarketCap.m in Sources */,
 				71CF84182000F142009F5D27 /* RDExchangeRate.h in Sources */,
 				71CF84192000F142009F5D27 /* ViewController.h in Sources */,
 				71CF841A2000F142009F5D27 /* RDCryto.h in Sources */,
@@ -188,6 +199,7 @@
 				71CF84022000F0ED009F5D27 /* CrytoPortfolio.xcdatamodeld in Sources */,
 				71CF84282000F6ED009F5D27 /* RDApiCryptoManager.m in Sources */,
 				71CF84032000F0ED009F5D27 /* Base.lproj in Sources */,
+				71CF842C20026B6F009F5D27 /* RDLunoRate.m in Sources */,
 				71CF84042000F0ED009F5D27 /* AppDelegate.h in Sources */,
 				71CF84082000F0ED009F5D27 /* Assets.xcassets in Sources */,
 				71CF840B2000F0ED009F5D27 /* AppDelegate.m in Sources */,

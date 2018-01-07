@@ -27,12 +27,19 @@
     
     [RDApiCryptoManager fetchCrypyos];
     
+    
+    
+    
+   
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cryptos:) name:@"cryptos" object:nil];
 
     
  
     return YES;
 }
+
+
 
 
 -(void)cryptos:(NSNotification*)notification
@@ -52,13 +59,15 @@
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
     }
-    
+    [RDApiCryptoManager fetchLunoRates:@"XBTZAR"];
+    [RDApiCryptoManager fetchLunoRates:@"ETHXBT"];
         [self performSelector:@selector(refresh) withObject:nil afterDelay:60];
 }
 
 -(void)refresh
 {
      [RDApiCryptoManager fetchCrypyos];
+    
 }
 
 

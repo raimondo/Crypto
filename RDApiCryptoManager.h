@@ -12,4 +12,8 @@
 
 +(void)fetchCrypyos;
 
++(void)fetchLunoRates:(NSString*)pair;
+
++(void)fetchMarketCap;
+
 @end
