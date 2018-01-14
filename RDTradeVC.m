@@ -199,15 +199,18 @@
             
             
             double  price_to ;
-            if (ETHon) {
+            if (ETHon)
                   price_to = [[RDTransactionManager sharedTransactionManager] marKetPriceOf:fromTextField.text];
 
-            }
-            
+            else
                 price_to = [[RDTransactionManager sharedTransactionManager] marKetPriceOf:toTextField.text];
-            priceTextField.text = [NSString stringWithFormat:@"%f", price_to  ];
+            
+            
+           // priceTextField.text = [NSString stringWithFormat:@"%f", price_to  ];
             
             fromAmountTextField.text = [NSString stringWithFormat:@"%f", price_to * [toAmountTextField.text doubleValue]];
+            
+            priceTextField.text = [NSString stringWithFormat:@"R %.2f", price_to* [toAmountTextField.text doubleValue] *[RDTransactionManager sharedTransactionManager].rate.rate ];
             
         }
     else

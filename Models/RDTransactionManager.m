@@ -107,16 +107,19 @@ static RDTransactionManager *sharedTransactionManager = nil;
 
 -(double)marKetPriceOf:(NSString*)symbol
 {
-    NSDictionary * dic = marketCaps ;
-    NSLog(@"symbol %@",symbol);
-    NSString *sym = [NSString stringWithFormat:@"%@",symbol];
-    RDMarketCap *cap =  [dic objectForKey:sym];
-    RDMarketCap *cap2 =  [dic objectForKey:@"BTC"];
-    
-    NSLog(@"dic objectForKey %@", [dic objectForKey:symbol]);
+//    NSDictionary * dic = marketCaps ;
+//    NSLog(@"symbol %@",symbol);
+//    NSString *sym = [NSString stringWithFormat:@"%@",symbol];
+//    RDMarketCap *cap =  [dic objectForKey:sym];
+//    RDMarketCap *cap2 =  [dic objectForKey:@"BTC"];
+//
+//    NSLog(@"dic objectForKey %@", [dic objectForKey:symbol]);
     RDMarketCap *marketCap = [marketCaps objectForKey:symbol];
     NSLog(@"marKetPriceOf");
     [RDCryto logObject:marketCap];
+    
+    NSLog(@"marKetPriceOf %f",[marketCap.price_btc doubleValue]);
+
     return [marketCap.price_btc doubleValue];
 }
 
