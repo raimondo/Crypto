@@ -193,8 +193,8 @@
         if ( textField.tag==3)
         {
             
-            NSLog(@"toTextField %@",toTextField.text);
-            NSLog(@"fromTextField %@",fromTextField.text);
+            NSLog(@"toTextField%@",toTextField.text);
+            NSLog(@"fromTextField%@",fromTextField.text);
 
             
             
