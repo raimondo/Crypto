@@ -9,17 +9,25 @@
 #import "AppDelegate.h"
 #import "RDApiCryptoManager.h"
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import "RDTradeVC.h"
+
+
 
 
 
 @interface AppDelegate ()
 {
     BOOL firstRun;
+    
 }
 
 @end
 
 @implementation AppDelegate
+
+@synthesize navVC;
+@synthesize profileVC;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -34,9 +42,28 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cryptos:) name:@"cryptos" object:nil];
 
-    
+   // [self test];
  
     return YES;
+}
+
+-(void)test
+{
+    RDTradeVC * locationVC = [[RDTradeVC alloc]init];
+    locationVC.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    navVC = [[UINavigationController alloc]initWithRootViewController:locationVC];
+    
+    navVC.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
+    self.window.rootViewController = navVC;
+    [self.window makeKeyAndVisible];
+}
+
+
+
+-(void)addProfileVC
+{
+   profileVC = [[MDProfileSliderVC alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width, 0,[UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
+    [navVC.view addSubview:profileVC];
 }
 
 
@@ -52,12 +79,13 @@
     
    ViewController * locationVC = [[ViewController alloc]init];
     locationVC.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
-   UINavigationController* navVC = [[UINavigationController alloc]initWithRootViewController:locationVC];
+    navVC = [[UINavigationController alloc]initWithRootViewController:locationVC];
     locationVC.cryptos = crytos;
     
     navVC.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     self.window.rootViewController = navVC;
     [self.window makeKeyAndVisible];
+        [self addProfileVC];
     }
     [RDApiCryptoManager fetchLunoRates:@"XBTZAR"];
     [RDApiCryptoManager fetchLunoRates:@"ETHXBT"];

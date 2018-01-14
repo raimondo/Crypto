@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "MDProfileSliderVC.h"
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    UINavigationController *navVC;
+    MDProfileSliderVC *profileVC;
+}
 
 @property (strong, nonatomic) UIWindow *window;
+@property ( strong, nonatomic) UINavigationController *navVC;
+@property( strong, nonatomic) MDProfileSliderVC *profileVC;
+
 
 @property (readonly, strong) NSPersistentContainer *persistentContainer;
 

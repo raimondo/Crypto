@@ -10,6 +10,10 @@
 #import "RDCryto.h"
 #import "RDLunoRate.h"
 #import "RDMarketCap.h"
+#import "RDTransactionManager.h"
+
+
+
 
 
 
@@ -69,8 +73,9 @@
 {
     
     // NSString*  newString = @"https://api.fixer.io/latest?base=USD";
+   // https://api.coinmarketcap.com/v1/ticker/dragonchain/
     
-    NSString*  newString =   @"https://api.coinmarketcap.com/v1/ticker/?limit=10";
+    NSString*  newString =   @"https://api.coinmarketcap.com/v1/ticker/?limit=100";
     
     // NSString*  newString = @"https://api.binance.com//api/v3/ticker/price";
     NSLog(@"newString %@",newString);
@@ -296,11 +301,12 @@
 }
 
 
-+ (void)postMarketCap:(NSDictionary*)dic
++ (void)postMarketCap:(NSMutableDictionary*)dic
 {
     dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
     dispatch_async(backgroundQueue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            [RDTransactionManager sharedTransactionManager].marketCaps = dic;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"marketCap" object:nil userInfo:@{@"marketCap": dic}];
         });
     });

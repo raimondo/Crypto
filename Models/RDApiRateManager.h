@@ -8,8 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "RDExchangeRate.h"
+
 @interface RDApiRateManager : NSObject
 
 +(void)fetchExchangeRates;
+
++ (RDExchangeRate *)rate;
+
 
 @end

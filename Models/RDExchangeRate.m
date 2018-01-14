@@ -15,7 +15,7 @@
 +(RDExchangeRate*)parseExchabgeRateDTOToModel:(double)rate
 {
     RDExchangeRate * exRate = [[RDExchangeRate alloc]init];
-    exRate.symbol = @"R";
+    exRate.symbol = @"ZAR";
     exRate.rate = rate;
     return exRate;
 }

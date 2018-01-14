@@ -13,6 +13,7 @@
 #import "RDLunoRate.h"
 #import "RDMarketCap.h"
 #import "RDApiCryptoManager.h"
+#import "AppDelegate.h"
 
 
 
@@ -44,6 +45,9 @@
     originalExchanceRate = 12.4;
     totalPrimaryInvestment = 0;
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+
     
     
      lunoBTCRateLabel = [[UILabel alloc]init];
@@ -79,7 +83,26 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(marketCap:) name:@"marketCap" object:nil];
 
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lunoRate:) name:@"lunoRate" object:nil];
+    
+    UIButton * profileButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    profileButton.frame = CGRectMake(self.view.bounds.size.width - 50, 60 , 50,50);
+    [profileButton setImage:[UIImage imageNamed:@"menuIconW"] forState:UIControlStateNormal];
+    profileButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    [profileButton addTarget:self action:@selector(profileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    profileButton.backgroundColor = [UIColor greenColor];
+    
+    UINavigationController *navVC = [(AppDelegate *)[[UIApplication sharedApplication] delegate] navVC];
 
+    [self.view addSubview:profileButton];
+
+}
+
+
+-(void)profileButtonPressed
+{
+    MDProfileSliderVC *profileVC =  [(AppDelegate *)[[UIApplication sharedApplication] delegate] profileVC];
+    [profileVC slideInProfileView];
+    
 }
 
 

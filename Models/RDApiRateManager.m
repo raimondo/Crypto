@@ -8,6 +8,9 @@
 
 #import "RDApiRateManager.h"
 #import "RDExchangeRate.h"
+#import "RDTransactionManager.h"
+
+
 
 
 
@@ -61,6 +64,7 @@
     dispatch_queue_t backgroundQueue = dispatch_queue_create("com.mycompany.myqueue", 0);
     dispatch_async(backgroundQueue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+          [RDTransactionManager sharedTransactionManager ].rate = response;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"rates" object:nil userInfo:@{@"rates" : response}];
         });
     });

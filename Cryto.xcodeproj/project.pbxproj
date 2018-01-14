@@ -9,12 +9,23 @@
 /* Begin PBXBuildFile section */
 		7114BB1D1FF12C79007EC0A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7114BB1B1FF12C79007EC0A0 /* Main.storyboard */; };
 		7114BB251FF12C79007EC0A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7114BB231FF12C79007EC0A0 /* LaunchScreen.storyboard */; };
-		71CF83E62000F023009F5D27 /* RDApiRateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF83E52000F022009F5D27 /* RDApiRateManager.m */; };
+		714F9098200A42CF004E67D4 /* RDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F9097200A42CF004E67D4 /* RDTransaction.m */; };
+		714F909B200A4301004E67D4 /* RDFiat_In.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F909A200A4301004E67D4 /* RDFiat_In.m */; };
+		714F909E200A432B004E67D4 /* RDFiat_Out.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F909D200A432B004E67D4 /* RDFiat_Out.m */; };
+		714F90A4200A438A004E67D4 /* RDLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90A3200A438A004E67D4 /* RDLocation.m */; };
+		714F90A7200A4AC0004E67D4 /* RDTrade.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90A6200A4AC0004E67D4 /* RDTrade.m */; };
+		714F90AA200A4AD7004E67D4 /* RDCrypto_Out.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90A9200A4AD7004E67D4 /* RDCrypto_Out.m */; };
+		714F90AF200A50FE004E67D4 /* MDProfileSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90AD200A50FD004E67D4 /* MDProfileSliderCell.m */; };
+		714F90B0200A50FE004E67D4 /* MDProfileSliderVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90AE200A50FD004E67D4 /* MDProfileSliderVC.m */; };
+		714F90B3200A5179004E67D4 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90B1200A5179004E67D4 /* UIView+Animation.m */; };
+		714F90B9200A6197004E67D4 /* RDFiat_InVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90B8200A6197004E67D4 /* RDFiat_InVC.m */; };
+		714F90BC200A6ED0004E67D4 /* RDTransactionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90BB200A6ED0004E67D4 /* RDTransactionManager.m */; };
+		714F90BE200B11F3004E67D4 /* RDApiRateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF84152000F141009F5D27 /* RDApiRateManager.m */; };
+		714F90C1200B137C004E67D4 /* RDTradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 714F90C0200B137C004E67D4 /* RDTradeVC.m */; };
 		71CF84022000F0ED009F5D27 /* CrytoPortfolio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 71CF83F62000F0E8009F5D27 /* CrytoPortfolio.xcdatamodeld */; };
 		71CF84032000F0ED009F5D27 /* Base.lproj in Sources */ = {isa = PBXBuildFile; fileRef = 71CF83F82000F0E9009F5D27 /* Base.lproj */; };
 		71CF84042000F0ED009F5D27 /* AppDelegate.h in Sources */ = {isa = PBXBuildFile; fileRef = 71CF83F92000F0E9009F5D27 /* AppDelegate.h */; };
 		71CF84082000F0ED009F5D27 /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 71CF83FD2000F0EB009F5D27 /* Assets.xcassets */; };
-		71CF840A2000F0ED009F5D27 /* RDApiRateManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 71CF83FF2000F0EB009F5D27 /* RDApiRateManager.h */; };
 		71CF840B2000F0ED009F5D27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 71CF84012000F0EC009F5D27 /* AppDelegate.m */; };
 		71CF84182000F142009F5D27 /* RDExchangeRate.h in Sources */ = {isa = PBXBuildFile; fileRef = 71CF840D2000F13E009F5D27 /* RDExchangeRate.h */; };
 		71CF84192000F142009F5D27 /* ViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 71CF840E2000F13E009F5D27 /* ViewController.h */; };
@@ -33,13 +44,34 @@
 		7114BB121FF12C79007EC0A0 /* Cryto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cryto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7114BB1C1FF12C79007EC0A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7114BB241FF12C79007EC0A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		71CF83E52000F022009F5D27 /* RDApiRateManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDApiRateManager.m; sourceTree = "<group>"; };
+		714F9096200A42CF004E67D4 /* RDTransaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDTransaction.h; sourceTree = "<group>"; };
+		714F9097200A42CF004E67D4 /* RDTransaction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDTransaction.m; sourceTree = "<group>"; };
+		714F9099200A4301004E67D4 /* RDFiat_In.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDFiat_In.h; sourceTree = "<group>"; };
+		714F909A200A4301004E67D4 /* RDFiat_In.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDFiat_In.m; sourceTree = "<group>"; };
+		714F909C200A432B004E67D4 /* RDFiat_Out.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDFiat_Out.h; sourceTree = "<group>"; };
+		714F909D200A432B004E67D4 /* RDFiat_Out.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDFiat_Out.m; sourceTree = "<group>"; };
+		714F90A2200A438A004E67D4 /* RDLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDLocation.h; sourceTree = "<group>"; };
+		714F90A3200A438A004E67D4 /* RDLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDLocation.m; sourceTree = "<group>"; };
+		714F90A5200A4AC0004E67D4 /* RDTrade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDTrade.h; sourceTree = "<group>"; };
+		714F90A6200A4AC0004E67D4 /* RDTrade.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDTrade.m; sourceTree = "<group>"; };
+		714F90A8200A4AD7004E67D4 /* RDCrypto_Out.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDCrypto_Out.h; sourceTree = "<group>"; };
+		714F90A9200A4AD7004E67D4 /* RDCrypto_Out.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDCrypto_Out.m; sourceTree = "<group>"; };
+		714F90AB200A50FC004E67D4 /* MDProfileSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProfileSliderCell.h; sourceTree = "<group>"; };
+		714F90AC200A50FC004E67D4 /* MDProfileSliderVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDProfileSliderVC.h; sourceTree = "<group>"; };
+		714F90AD200A50FD004E67D4 /* MDProfileSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProfileSliderCell.m; sourceTree = "<group>"; };
+		714F90AE200A50FD004E67D4 /* MDProfileSliderVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDProfileSliderVC.m; sourceTree = "<group>"; };
+		714F90B1200A5179004E67D4 /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animation.m"; sourceTree = "<group>"; };
+		714F90B2200A5179004E67D4 /* UIView+Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Animation.h"; sourceTree = "<group>"; };
+		714F90B7200A6197004E67D4 /* RDFiat_InVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDFiat_InVC.h; sourceTree = "<group>"; };
+		714F90B8200A6197004E67D4 /* RDFiat_InVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDFiat_InVC.m; sourceTree = "<group>"; };
+		714F90BA200A6ED0004E67D4 /* RDTransactionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDTransactionManager.h; sourceTree = "<group>"; };
+		714F90BB200A6ED0004E67D4 /* RDTransactionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDTransactionManager.m; sourceTree = "<group>"; };
+		714F90BF200B137C004E67D4 /* RDTradeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDTradeVC.h; sourceTree = "<group>"; };
+		714F90C0200B137C004E67D4 /* RDTradeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDTradeVC.m; sourceTree = "<group>"; };
 		71CF83F72000F0E8009F5D27 /* CrytoPortfolio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CrytoPortfolio.xcdatamodel; sourceTree = "<group>"; };
 		71CF83F82000F0E9009F5D27 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Base.lproj; sourceTree = "<group>"; };
 		71CF83F92000F0E9009F5D27 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		71CF83FD2000F0EB009F5D27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		71CF83FF2000F0EB009F5D27 /* RDApiRateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDApiRateManager.h; sourceTree = "<group>"; };
-		71CF84002000F0EC009F5D27 /* RDApiRateManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RDApiRateManager.m; sourceTree = "<group>"; };
 		71CF84012000F0EC009F5D27 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		71CF840D2000F13E009F5D27 /* RDExchangeRate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDExchangeRate.h; sourceTree = "<group>"; };
 		71CF840E2000F13E009F5D27 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -51,7 +83,6 @@
 		71CF84172000F142009F5D27 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		71CF841E2000F1A7009F5D27 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		71CF84222000F3C4009F5D27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		71CF84252000F5EF009F5D27 /* RDApiRateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RDApiRateManager.h; sourceTree = "<group>"; };
 		71CF84262000F6ED009F5D27 /* RDApiCryptoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDApiCryptoManager.h; sourceTree = "<group>"; };
 		71CF84272000F6ED009F5D27 /* RDApiCryptoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDApiCryptoManager.m; sourceTree = "<group>"; };
 		71CF84292000F83C009F5D27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,30 +106,25 @@
 		7114BB091FF12C79007EC0A0 = {
 			isa = PBXGroup;
 			children = (
-				71CF84292000F83C009F5D27 /* Info.plist */,
-				71CF84262000F6ED009F5D27 /* RDApiCryptoManager.h */,
-				71CF84272000F6ED009F5D27 /* RDApiCryptoManager.m */,
-				71CF84252000F5EF009F5D27 /* RDApiRateManager.h */,
-				71CF83E52000F022009F5D27 /* RDApiRateManager.m */,
-				71CF84142000F140009F5D27 /* RDApiRateManager.h */,
-				71CF84152000F141009F5D27 /* RDApiRateManager.m */,
-				71CF840F2000F13F009F5D27 /* RDCryto.h */,
-				71CF84162000F141009F5D27 /* RDCryto.m */,
-				71CF842D2002814D009F5D27 /* RDMarketCap.h */,
-				71CF842E2002814D009F5D27 /* RDMarketCap.m */,
-				71CF842A20026B6F009F5D27 /* RDLunoRate.h */,
-				71CF842B20026B6F009F5D27 /* RDLunoRate.m */,
-				71CF840D2000F13E009F5D27 /* RDExchangeRate.h */,
-				71CF84112000F13F009F5D27 /* RDExchangeRate.m */,
 				71CF840E2000F13E009F5D27 /* ViewController.h */,
 				71CF84172000F142009F5D27 /* ViewController.m */,
+				714F90B7200A6197004E67D4 /* RDFiat_InVC.h */,
+				714F90B8200A6197004E67D4 /* RDFiat_InVC.m */,
+				714F90AB200A50FC004E67D4 /* MDProfileSliderCell.h */,
+				714F90AD200A50FD004E67D4 /* MDProfileSliderCell.m */,
+				714F90AC200A50FC004E67D4 /* MDProfileSliderVC.h */,
+				714F90AE200A50FD004E67D4 /* MDProfileSliderVC.m */,
+				714F90BF200B137C004E67D4 /* RDTradeVC.h */,
+				714F90C0200B137C004E67D4 /* RDTradeVC.m */,
+				714F90BD200B119E004E67D4 /* Models */,
+				714F90B2200A5179004E67D4 /* UIView+Animation.h */,
+				714F90B1200A5179004E67D4 /* UIView+Animation.m */,
 				71CF83F92000F0E9009F5D27 /* AppDelegate.h */,
 				71CF84012000F0EC009F5D27 /* AppDelegate.m */,
+				71CF84292000F83C009F5D27 /* Info.plist */,
 				71CF83FD2000F0EB009F5D27 /* Assets.xcassets */,
 				71CF83F82000F0E9009F5D27 /* Base.lproj */,
 				71CF83F62000F0E8009F5D27 /* CrytoPortfolio.xcdatamodeld */,
-				71CF83FF2000F0EB009F5D27 /* RDApiRateManager.h */,
-				71CF84002000F0EC009F5D27 /* RDApiRateManager.m */,
 				71CF84222000F3C4009F5D27 /* Info.plist */,
 				7114BB1B1FF12C79007EC0A0 /* Main.storyboard */,
 				7114BB231FF12C79007EC0A0 /* LaunchScreen.storyboard */,
@@ -113,6 +139,39 @@
 				7114BB121FF12C79007EC0A0 /* Cryto.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		714F90BD200B119E004E67D4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				714F90BA200A6ED0004E67D4 /* RDTransactionManager.h */,
+				714F90BB200A6ED0004E67D4 /* RDTransactionManager.m */,
+				71CF84262000F6ED009F5D27 /* RDApiCryptoManager.h */,
+				71CF84272000F6ED009F5D27 /* RDApiCryptoManager.m */,
+				71CF84142000F140009F5D27 /* RDApiRateManager.h */,
+				71CF84152000F141009F5D27 /* RDApiRateManager.m */,
+				71CF840F2000F13F009F5D27 /* RDCryto.h */,
+				71CF84162000F141009F5D27 /* RDCryto.m */,
+				714F9096200A42CF004E67D4 /* RDTransaction.h */,
+				714F9097200A42CF004E67D4 /* RDTransaction.m */,
+				714F90A5200A4AC0004E67D4 /* RDTrade.h */,
+				714F90A6200A4AC0004E67D4 /* RDTrade.m */,
+				714F90A8200A4AD7004E67D4 /* RDCrypto_Out.h */,
+				714F90A9200A4AD7004E67D4 /* RDCrypto_Out.m */,
+				714F9099200A4301004E67D4 /* RDFiat_In.h */,
+				714F909A200A4301004E67D4 /* RDFiat_In.m */,
+				714F909C200A432B004E67D4 /* RDFiat_Out.h */,
+				714F909D200A432B004E67D4 /* RDFiat_Out.m */,
+				714F90A2200A438A004E67D4 /* RDLocation.h */,
+				714F90A3200A438A004E67D4 /* RDLocation.m */,
+				71CF842D2002814D009F5D27 /* RDMarketCap.h */,
+				71CF842E2002814D009F5D27 /* RDMarketCap.m */,
+				71CF842A20026B6F009F5D27 /* RDLunoRate.h */,
+				71CF842B20026B6F009F5D27 /* RDLunoRate.m */,
+				71CF840D2000F13E009F5D27 /* RDExchangeRate.h */,
+				71CF84112000F13F009F5D27 /* RDExchangeRate.m */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,22 +245,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				71CF84232000F3C4009F5D27 /* Info.plist in Sources */,
-				71CF840A2000F0ED009F5D27 /* RDApiRateManager.h in Sources */,
 				71CF842F2002814E009F5D27 /* RDMarketCap.m in Sources */,
+				714F90AF200A50FE004E67D4 /* MDProfileSliderCell.m in Sources */,
 				71CF84182000F142009F5D27 /* RDExchangeRate.h in Sources */,
 				71CF84192000F142009F5D27 /* ViewController.h in Sources */,
 				71CF841A2000F142009F5D27 /* RDCryto.h in Sources */,
+				714F90AA200A4AD7004E67D4 /* RDCrypto_Out.m in Sources */,
+				714F90BE200B11F3004E67D4 /* RDApiRateManager.m in Sources */,
+				714F90C1200B137C004E67D4 /* RDTradeVC.m in Sources */,
 				71CF841B2000F142009F5D27 /* RDExchangeRate.m in Sources */,
+				714F90B9200A6197004E67D4 /* RDFiat_InVC.m in Sources */,
 				71CF841F2000F1A8009F5D27 /* main.m in Sources */,
-				71CF83E62000F023009F5D27 /* RDApiRateManager.m in Sources */,
+				714F90BC200A6ED0004E67D4 /* RDTransactionManager.m in Sources */,
 				71CF841C2000F142009F5D27 /* RDCryto.m in Sources */,
+				714F90B3200A5179004E67D4 /* UIView+Animation.m in Sources */,
+				714F909B200A4301004E67D4 /* RDFiat_In.m in Sources */,
 				71CF841D2000F142009F5D27 /* ViewController.m in Sources */,
+				714F909E200A432B004E67D4 /* RDFiat_Out.m in Sources */,
 				71CF84022000F0ED009F5D27 /* CrytoPortfolio.xcdatamodeld in Sources */,
+				714F90B0200A50FE004E67D4 /* MDProfileSliderVC.m in Sources */,
 				71CF84282000F6ED009F5D27 /* RDApiCryptoManager.m in Sources */,
 				71CF84032000F0ED009F5D27 /* Base.lproj in Sources */,
 				71CF842C20026B6F009F5D27 /* RDLunoRate.m in Sources */,
+				714F90A4200A438A004E67D4 /* RDLocation.m in Sources */,
 				71CF84042000F0ED009F5D27 /* AppDelegate.h in Sources */,
 				71CF84082000F0ED009F5D27 /* Assets.xcassets in Sources */,
+				714F90A7200A4AC0004E67D4 /* RDTrade.m in Sources */,
+				714F9098200A42CF004E67D4 /* RDTransaction.m in Sources */,
 				71CF840B2000F0ED009F5D27 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
