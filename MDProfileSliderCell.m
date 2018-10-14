@@ -39,12 +39,12 @@
         
          txtLabel = [[UILabel alloc]initWithFrame:CGRectMake(25, 22, [UIScreen mainScreen].bounds.size.width-50, 20)];
         //txtLabel.font = [UIFont fontWithName:kFontRegular size:16];
-        txtLabel.textColor = [UIColor whiteColor];
+        txtLabel.textColor = [UIColor blueColor];
         [self addSubview:txtLabel];
         
         
         line = [[UIView alloc]initWithFrame:CGRectMake(25, 62, [UIScreen mainScreen].bounds.size.width-50, 2)];
-        line.backgroundColor = [UIColor whiteColor];
+        line.backgroundColor = [UIColor grayColor];
         [self addSubview:line];
         
         self.backgroundColor = [UIColor blackColor];

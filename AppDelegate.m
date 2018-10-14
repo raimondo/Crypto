@@ -43,7 +43,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cryptos:) name:@"cryptos" object:nil];
 
    // [self test];
- 
+    
+    double orderN = [[NSDate date] timeIntervalSince1970]*1000000;
+
+    
+     NSDate * date =    [NSDate dateWithTimeIntervalSince1970:orderN/1000000];
+    
+    NSLog(@"date %@",date);
+    
+     NSLog(@"date %f == %f",[date timeIntervalSince1970]*1000000,orderN);
+    
+    
     return YES;
 }
 
@@ -80,7 +90,7 @@
    ViewController * locationVC = [[ViewController alloc]init];
     locationVC.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     navVC = [[UINavigationController alloc]initWithRootViewController:locationVC];
-    locationVC.cryptos = crytos;
+   // locationVC.cryptos = crytos;
     
     navVC.view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     self.window.rootViewController = navVC;

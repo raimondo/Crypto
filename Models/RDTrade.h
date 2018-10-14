@@ -28,8 +28,12 @@
 
 @property(nonatomic,strong) NSString * quantity;
 
+@property(nonatomic,strong) NSString * date;
 
-+(RDTrade*)parseTransactionToModel:(NSDictionary*)dic;
+
++(RDTrade*)parseTradeToModel:(NSDictionary*)dic;
+
++(NSDictionary*)parseTradeToDic:(RDTrade*)trade;
 
 
 @end

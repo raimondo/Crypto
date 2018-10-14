@@ -33,7 +33,7 @@
                                                     
                                                     id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                                     
-                                                    NSLog(@"json %@",json);
+                                                  //  NSLog(@"json %@",json);
                                                     
                                                     if (json) {
                                                         NSDictionary *rates = json[@"rates"];

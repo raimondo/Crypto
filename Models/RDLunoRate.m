@@ -24,7 +24,7 @@
     {
         NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
             [crypto setValue:dic[key] forKey:key];
-        NSLog(@"key %@",key);
+        NSLog(@"key %@ : %@",key,dic[key]);
         if ([dic[key] isEqualToString:@"XBTZAR"]) {
             [RDTransactionManager sharedTransactionManager].BTCZARprice = dic[@"last_trade"];
         }

@@ -14,7 +14,11 @@
 #import "RDMarketCap.h"
 #import "RDApiCryptoManager.h"
 #import "AppDelegate.h"
+#import "RDPersistanceManager.h"
+#import "RDTradeCell.h"
+#import "RDTransactionVC.h"
 
+#import "RDTransactionManager.h"
 
 
 @interface ViewController ()
@@ -27,6 +31,8 @@
     UILabel * lunoETHRateLabel ;
      RDLunoRate * lunoBTCRate ;
      RDLunoRate * lunoETHRate ;
+    double premium ;
+   UIRefreshControl* refreshControl;
 }
 
 
@@ -74,6 +80,13 @@
     tableView.backgroundColor = [UIColor blackColor];
     [[self view] addSubview:tableView];
     tableView.sectionIndexMinimumDisplayRowCount = 12;
+    
+    refreshControl = [UIRefreshControl new];
+    [refreshControl addTarget:self action:@selector(handleRefresh:) forControlEvents:UIControlEventValueChanged];
+    [tableView addSubview:refreshControl];
+    [tableView sendSubviewToBack:refreshControl];
+    
+    
     self.title = @"Crypto's";
     
   
@@ -89,12 +102,35 @@
     [profileButton setImage:[UIImage imageNamed:@"menuIconW"] forState:UIControlStateNormal];
     profileButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [profileButton addTarget:self action:@selector(profileButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    profileButton.backgroundColor = [UIColor greenColor];
+   // profileButton.backgroundColor = [UIColor greenColor];
     
     UINavigationController *navVC = [(AppDelegate *)[[UIApplication sharedApplication] delegate] navVC];
 
     [self.view addSubview:profileButton];
+    
+    NSArray *cryptos = [[RDPersistanceManager sharedPersistanceManager]  getCryptos];
+    NSLog(@"getCryptos ");
 
+    for (RDCryto *crypto in cryptos) {
+        [RDCryto logObject:crypto];
+    }
+}
+
+
+
+- (void)handleRefresh:(UIRefreshControl *)refreshCtl
+{
+    
+     [RDApiCryptoManager fetchCrypyos];
+  
+}
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    cryptos =  [[RDPersistanceManager sharedPersistanceManager]  getCryptos];
+    [tableView reloadData];
 }
 
 
@@ -117,7 +153,7 @@
         
         NSDictionary *dic = note[@"marketCap"];
         
-        NSLog(@"dic %@",dic);
+      //  NSLog(@"dic %@",dic);
         //lunoBTCRateLabel.text =  [NSString stringWithFormat:@"R%.2f",[rate.last_trade doubleValue] ];
         if (dic[@"ETH"]) {
             RDMarketCap *marketCap = dic[@"ETH"];
@@ -131,13 +167,16 @@
             RDMarketCap *marketCap = dic[@"BTC"];
             
             
-            double premium =   (([lunoBTCRate.last_trade doubleValue] ) -   exchanceRate * [marketCap.price_usd doubleValue])/(exchanceRate * [marketCap.price_usd doubleValue])*100;
+             premium =   (([lunoBTCRate.last_trade doubleValue] ) -   exchanceRate * [marketCap.price_usd doubleValue])/(exchanceRate * [marketCap.price_usd doubleValue])*100;
             
             lunoBTCRateLabel.text =  [NSString stringWithFormat:@"R %.2f  (%.2f)  BTC",[lunoBTCRate.last_trade doubleValue] ,premium];
             
             
         }
     }
+    
+    cryptos = [[RDPersistanceManager sharedPersistanceManager] getCryptos];
+    [tableView reloadData];
   
     
 }
@@ -177,24 +216,25 @@
     self.title = [NSString stringWithFormat:@"R%.2f",totalPrimaryInvestment-65000 ];
     NSLog(@"exchanceRate %f",exchanceRate);
     }
+     [refreshControl endRefreshing];
     [tableView reloadData];
 }
 
 
 -(void)cryptos:(NSNotification*)notification
 {
-    NSDictionary * note = [notification userInfo];
-    cryptos = note[@"cryptos"];
-    double total = 0;
-    totalPrimaryInvestment = 0;
-    for (RDCryto *crypto in cryptos) {
-        total += crypto.priceChangeDouble;
-        totalPrimaryInvestment += crypto.currentExchangedValue*exchanceRate;
-        NSLog(@" symbol %@  rimaryInvestment %f price %@",crypto.symbol,crypto.currentExchangedValue*exchanceRate,crypto.price);
-        NSLog(@"totalPrimaryInvestment %f",totalPrimaryInvestment);
-    }
-    
-    self.title = [NSString stringWithFormat:@"R%.2f",totalPrimaryInvestment-65000];
+//    NSDictionary * note = [notification userInfo];
+//    //cryptos = note[@"cryptos"];
+//    double total = 0;
+//    totalPrimaryInvestment = 0;
+//    for (RDCryto *crypto in cryptos) {
+//        total += crypto.priceChangeDouble;
+//        totalPrimaryInvestment += crypto.currentExchangedValue*exchanceRate;
+//        NSLog(@" symbol %@  rimaryInvestment %f price %@",crypto.symbol,crypto.currentExchangedValue*exchanceRate,crypto.price);
+//        NSLog(@"totalPrimaryInvestment %f",totalPrimaryInvestment);
+//    }
+//    
+//    self.title = [NSString stringWithFormat:@"R%.2f",totalPrimaryInvestment-65000];
     
     
      [RDApiRateManager fetchExchangeRates];
@@ -214,37 +254,65 @@
     return 1;
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (nonnull RDTradeCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    RDTradeCell *cell = (RDTradeCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[RDTradeCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         cell.backgroundColor = [UIColor blackColor];
          cell.detailTextLabel.textColor = [UIColor greenColor];
          cell.textLabel.textColor = [UIColor blueColor];
     }
     RDCryto * crypto = [cryptos objectAtIndex:indexPath.row];
     cell.textLabel.text =crypto.symbol;
-    cell.detailTextLabel.text = crypto.priceChangePercent;
     
+    NSLog(@"[lunoBTCRate.last_trade doubleValue]  %f",[lunoBTCRate.last_trade doubleValue] );
+    NSLog(@"crypto.primaryPriceInUSD*exchanceRate %f",crypto.primaryPriceInUSD*exchanceRate);
+    NSLog(@"(crypto.primaryPriceInUSD*exchanceRate)*premium/100 %f",(crypto.primaryPriceInUSD*exchanceRate)*premium/100);
+
+    double averagePrice = ((crypto.primaryPriceInUSD*exchanceRate )  + ((crypto.primaryPriceInUSD*exchanceRate)*premium/100))/crypto.transactions.count;
+    
+    
+    
+    cell.detailTextLabel.text =  [self formatRandValue:averagePrice*crypto.quantity ];
+    
+
+    cell.percentLabel.text = [NSString stringWithFormat:@"%.1f%%", [crypto.priceChangePercent doubleValue] ];
+     cell.volLabel.text = [NSString stringWithFormat:@"%.1f%%",crypto.marketCap_volume  ];
      if ([crypto.priceChangePercent rangeOfString:@"-"].location == NSNotFound) {
-          cell.detailTextLabel.textColor = [UIColor greenColor];
+          cell.percentLabel.textColor = [UIColor greenColor];
+         cell.volLabel.textColor = [UIColor greenColor];
     }
     else
-         cell.detailTextLabel.textColor = [UIColor redColor];
-    
-   
+    {
+        cell.percentLabel.textColor = [UIColor redColor];
+        cell.volLabel.textColor = [UIColor redColor];
+    }
+    NSLog(@"averagePrice %f",averagePrice);
+    NSLog(@"market price %f",[[RDTransactionManager sharedTransactionManager] marKetPriceOf:crypto.symbol]*[lunoBTCRate.last_trade doubleValue]);
+//    NSLog(@"exchanceRate %f",exchanceRate);
+//
+//    NSLog(@"[[RDTransactionManager sharedTransactionManager] marKetPriceOf:crypto.symbol] %f",[[RDTransactionManager sharedTransactionManager] marKetPriceOf:crypto.symbol]);
+
+    if ( averagePrice  <= ([[RDTransactionManager sharedTransactionManager] marKetPriceOf:crypto.symbol]*[lunoBTCRate.last_trade doubleValue])) {
+        cell.detailTextLabel.textColor = [UIColor greenColor];
+    }
+    else
+        cell.detailTextLabel.textColor = [UIColor redColor];
     
     return cell;
-    
 }
 
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    RDCryto * crypto = [cryptos objectAtIndex:indexPath.row];
+    [RDCryto logObject:crypto];
+    RDTransactionVC *transactionVC = [[RDTransactionVC alloc]initWithTransactions:crypto.transactions];
+    [self.navigationController pushViewController:transactionVC animated:YES];
+
 }
 
 
@@ -255,6 +323,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(NSString*)formatRandValue:(double)value
+{
+NSNumberFormatter *_priceFormatter = [[NSNumberFormatter alloc] init];
+[_priceFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+[_priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
+  NSLocale *locale =  [NSLocale currentLocale];
+    
+[_priceFormatter setLocale:locale];
+return  [_priceFormatter stringFromNumber:[NSNumber numberWithDouble:value]];
+
+}
 
 @end

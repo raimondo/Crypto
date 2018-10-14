@@ -22,6 +22,13 @@
     for (int i = 0; i < count; i++)
     {
         NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
+        //NSLog(@"key %@ %@",key,dic[@"name"]);
+        if ([key isEqualToString:@"_24h_volume_usd"]) {
+            
+            
+            [crypto setValue:dic[@"24h_volume_usd"] forKey:@"_24h_volume_usd"];
+        }
+        else
         
             [crypto setValue:dic[key] forKey:key];
        

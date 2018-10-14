@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RDTrade.h"
+#import "RDTransaction.h"
+
+
 
 @interface RDTradeVC : UIViewController <UITextFieldDelegate>
+
+
+- (instancetype)initTransaction:(RDTransaction*)transaction;
 
 @end

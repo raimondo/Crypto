@@ -12,9 +12,12 @@
 
 @interface RDApiRateManager : NSObject
 
+
+
 +(void)fetchExchangeRates;
 
 + (RDExchangeRate *)rate;
+
 
 
 @end

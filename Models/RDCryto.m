@@ -8,6 +8,7 @@
 
 #import "RDCryto.h"
 #import <objc/runtime.h>
+#import "RDTransaction.h"
 
 
 @implementation RDCryto
@@ -22,7 +23,7 @@
         {
             NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
             
-            if (![key isEqualToString:@"priceChangeDouble"]&& ![key isEqualToString:@"primaryInvestment"] && ![key isEqualToString:@"quantity"] && ![key isEqualToString:@"currentExchangedValue"] ) {
+            if (![key isEqualToString:@"priceChangeDouble"]&& ![key isEqualToString:@"primaryPriceInUSD"] && ![key isEqualToString:@"primaryPriceInZAR"] && ![key isEqualToString:@"primaryPriceInBTC"] && ![key isEqualToString:@"quantity"] && ![key isEqualToString:@"currentExchangedValue"]  && ![key isEqualToString:@"marketCap_volume"]  && ![key isEqualToString:@"transactions"] ) {
                 [crypto setValue:dic[key] forKey:key];
 
             }
@@ -30,13 +31,15 @@
         }
     
         free(properties);
+    
+    //[self logObject:crypto];
         return crypto;
 }
 
 
 +(void)logObject:(id)object
 {
-    NSLog(@"========================= logObject =========================");
+    NSLog(@"========================= %@ =========================",[object description]);
 //    MDLog(@"%@",object);
     unsigned int count = 0;
     objc_property_t *properties = class_copyPropertyList([object class], &count);
@@ -45,17 +48,21 @@
         NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
         NSLog(@"%@ = %@",key ,[object valueForKey:key]);
         
-        if ([key isEqualToString:@"active_promotion"]) {
+        if ([key isEqualToString:@"bye"]) {
             if ([object valueForKey:key]) {
                 [self logObject:[object valueForKey:key]];
             }
         }
-        if ([key isEqualToString:@"indicators"]) {
+        if ([key isEqualToString:@"sell"]) {
             if ([object valueForKey:key]) {
-                NSArray *indicators =[object valueForKey:key];
-                for (id obj in indicators) {
-                    [self logObject:obj];
-                }
+                [self logObject:[object valueForKey:key]];
+
+            }
+        }
+        if ([key isEqualToString:@"transactions"]) {
+            NSArray * transactions = [object valueForKey:key];
+            for (RDTransaction * trans in transactions) {
+                [self logObject:trans];
             }
         }
     }

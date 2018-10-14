@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RDFiat_In.h"
 #import "RDExchangeRate.h"
+#import "RDTrade.h"
 
 
 typedef enum
@@ -45,9 +46,17 @@ typedef enum
 + (RDTransactionManager *)sharedTransactionManager;
 
 
--(void)addTransaction:(TransactionType)type transaction:(id)transaction;
+-(RDTrade*)addTransaction:(TransactionType)type transaction:(id)transaction;
 
 -(double)marKetPriceOf:(NSString*)symbol;
+
+-(double)marKetUSDPriceOf:(NSString*)symbol;
+
+-(double)marKetPercentageChangeOf:(NSString*)symbol;
+
+-(double)marKetCap_volume:(NSString*)symbol;
+
+-(void)persistTransactionSell:(RDTrade*)bye bye:(RDTrade*)sell;
 
 
 

@@ -8,10 +8,10 @@
 
 #import "RDTransactionManager.h"
 #import "RDTransaction.h"
-#import "RDTrade.h"
 #import "RDApiRateManager.h"
 #import "RDCryto.h"
 #import "RDMarketCap.h"
+#import "RDPersistanceManager.h"
 
 
 
@@ -51,12 +51,15 @@ static RDTransactionManager *sharedTransactionManager = nil;
 
 
 
--(void)addTransaction:(TransactionType)type transaction:(id)transaction
+-(RDTrade*)addTransaction:(TransactionType)type transaction:(id)transaction
 {
     if (!transactions) {
         transactions = [[NSMutableArray alloc]init];
         
     }
+    
+    double  eth_price = [[RDTransactionManager sharedTransactionManager] marKetPriceOf:@"ETH"];
+
     
     if (type == TransactionTypeFiat_Inn) {
         RDFiat_In *fiat_In = transaction;
@@ -70,28 +73,54 @@ static RDTransactionManager *sharedTransactionManager = nil;
     }
     else
         if (type == TransactionTypeSell) {
+            
+
             RDTrade *tradeSell = transaction;
             
+            double  usd_price_from = [[RDTransactionManager sharedTransactionManager] marKetUSDPriceOf:tradeSell.symbol];
+            double  price_from = [[RDTransactionManager sharedTransactionManager] marKetPriceOf:tradeSell.symbol];
+
+            
             tradeSell.dollar_rand_rate = [NSString stringWithFormat:@"%f", rate.rate ];
-            tradeSell.prim_price_USD = [NSString stringWithFormat:@"%f",  [tradeSell.prim_ZAR doubleValue] /rate.rate];
+            tradeSell.prim_price_USD = [NSString stringWithFormat:@"%f", usd_price_from];
+            tradeSell.prim_price_BTC = [NSString stringWithFormat:@"%f", price_from];
+            tradeSell.prim_ZAR = [NSString stringWithFormat:@"%f", usd_price_from * rate.rate];
+            tradeSell.prim_price_ETH = [NSString stringWithFormat:@"%f", price_from/eth_price];
             tradeSell.type = @"sell";
-            
           
-            
+         
             [transactions addObject:tradeSell];
+            
+             return tradeSell;
         }
     
     if (type == TransactionTypeBye) {
-        RDTrade *tradeSell = transaction;
-        
-        tradeSell.dollar_rand_rate = [NSString stringWithFormat:@"%f", rate.rate ];
-        tradeSell.prim_price_USD = [NSString stringWithFormat:@"%f",  [tradeSell.prim_ZAR doubleValue] /rate.rate];
-        tradeSell.type = @"bye";
+        RDTrade *tradeBye = transaction;
         
         
+        double  usd_price_to = [[RDTransactionManager sharedTransactionManager] marKetUSDPriceOf:tradeBye.symbol];
+        double  price_to = [[RDTransactionManager sharedTransactionManager] marKetPriceOf:tradeBye.symbol];
+
         
-        [transactions addObject:tradeSell];
+        tradeBye.dollar_rand_rate = [NSString stringWithFormat:@"%f", rate.rate ];
+        tradeBye.prim_price_USD = [NSString stringWithFormat:@"%f", usd_price_to];
+        tradeBye.prim_price_BTC = [NSString stringWithFormat:@"%f", price_to];
+        tradeBye.prim_ZAR = [NSString stringWithFormat:@"%f", usd_price_to * rate.rate];
+        tradeBye.prim_price_ETH = [NSString stringWithFormat:@"%f", price_to/eth_price];
+        
+
+        tradeBye.type = @"bye";
+        
+        
+        [transactions addObject:tradeBye];
+        
+        return tradeBye;
+        
+        
     }
+    
+   // NSDate * date =    [NSDate dateWithTimeIntervalSince1970:[key doubleValue]/1000000];
+
     
     NSLog(@"transactions %@",transactions);
     
@@ -99,28 +128,114 @@ static RDTransactionManager *sharedTransactionManager = nil;
     for (id obj in transactions) {
         [RDCryto logObject:obj];
     }
- 
-    
+    return nil;
+}
+
+
+-(void)persistTransactionSell:(RDTrade*)sell  bye: (RDTrade*)bye
+{
+    RDTransaction * trans = [[RDTransaction alloc]init];
+    NSString *  dateKey ;
+    if (bye.date)
+    {
+        dateKey = bye.date ;
+    }
+    else
+        if ( sell.date)
+        {
+            dateKey = sell.date;
+        }
+        else
+    {
+        NSDate * date = [NSDate date];
+       
+        dateKey = [NSString stringWithFormat:@"%.0f",[date timeIntervalSince1970]*1000000];
+        bye.date = dateKey;
+        sell.date = dateKey;
+    }
    
+    trans.date = dateKey;
+    trans.bye = bye;
+    trans.sell = sell;
+    [[RDPersistanceManager sharedPersistanceManager] addTransaction:trans];
+}
+
+
+
+-(double)marKetCap_volume:(NSString*)symbol
+{
+    NSString *sym = symbol;
+    NSLog(@"symbol %@",symbol);
+    
+    if ([symbol isEqualToString:@"ZAR"]) {
+        return  rate.rate;
+    }
+    
+    RDMarketCap *marketCap = [self.marketCaps objectForKey:sym];
+    // NSLog(@"marKetPriceOf");
+       [RDCryto logObject:marketCap];
+    //
+        NSLog(@"market_cap_usd %f",[marketCap.market_cap_usd doubleValue]);
+    NSLog(@"_24h_volume_usd %f",[marketCap._24h_volume_usd doubleValue]);
+
+    
+    return [marketCap.market_cap_usd doubleValue]/ [marketCap._24h_volume_usd doubleValue];
 }
 
 
 -(double)marKetPriceOf:(NSString*)symbol
 {
-//    NSDictionary * dic = marketCaps ;
-//    NSLog(@"symbol %@",symbol);
-//    NSString *sym = [NSString stringWithFormat:@"%@",symbol];
-//    RDMarketCap *cap =  [dic objectForKey:sym];
-//    RDMarketCap *cap2 =  [dic objectForKey:@"BTC"];
+    NSString *sym = symbol;
+   // NSLog(@"symbol %@",symbol);
+    
+    if ([symbol isEqualToString:@"ZAR"]) {
+        return  rate.rate;
+    }
+    RDMarketCap *marketCap = [self.marketCaps objectForKey:sym];
+   // NSLog(@"marKetPriceOf");
+//    [RDCryto logObject:marketCap];
 //
-//    NSLog(@"dic objectForKey %@", [dic objectForKey:symbol]);
-    RDMarketCap *marketCap = [marketCaps objectForKey:symbol];
+//    NSLog(@"marKetPriceOf %f",[marketCap.price_btc doubleValue]);
+
+    return [marketCap.price_btc doubleValue];
+}
+
+
+-(double)marKetUSDPriceOf:(NSString*)symbol
+{
+    NSString *sym = symbol;
+    NSLog(@"symbol %@",symbol);
+   
+    
+    if ([symbol isEqualToString:@"ZAR"]) {
+        return  rate.rate;
+    }
+    RDMarketCap *marketCap = [self.marketCaps objectForKey:sym];
     NSLog(@"marKetPriceOf");
     [RDCryto logObject:marketCap];
     
-    NSLog(@"marKetPriceOf %f",[marketCap.price_btc doubleValue]);
+    NSLog(@"marKetUSDPriceOf %f",[marketCap.price_usd doubleValue]);
+    
+    return [marketCap.price_usd doubleValue];
+}
 
-    return [marketCap.price_btc doubleValue];
+
+-(double)marKetPercentageChangeOf:(NSString*)symbol
+{
+    NSString *sym = symbol;
+    NSLog(@"symbol %@",symbol);
+    
+    
+    if ([symbol isEqualToString:@"ZAR"]) {
+        return  rate.rate;
+    }
+    RDMarketCap *marketCap = [self.marketCaps objectForKey:sym];
+    NSLog(@"marKetPriceOf");
+    [RDCryto logObject:marketCap];
+    
+    NSLog(@"marKetUSDPriceOf %f",[marketCap.percent_change_24h doubleValue]);
+    
+    return [marketCap.percent_change_24h doubleValue];
 }
 
 

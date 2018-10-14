@@ -23,19 +23,30 @@
 
 @property (nonatomic) double priceChangeDouble;
 
-@property (nonatomic) double primaryInvestment;
+@property (nonatomic) double primaryPriceInBTC;
+
+@property (nonatomic) double primaryPriceInUSD;
+
+@property (nonatomic) double primaryPriceInZAR;
 
 @property (nonatomic) double quantity;
 
 @property (nonatomic)double currentExchangedValue;
 
+@property(nonatomic)double marketCap_volume;
 
+@property(nonatomic,strong)NSMutableArray * transactions;
 
 
 +(RDCryto*)parseCryptoDTOToModel:(NSDictionary*)dic;
 
 
 +(void)logObject:(id)object;
+
+
+
+
+
 
 
 //askPrice = "0.05203000";

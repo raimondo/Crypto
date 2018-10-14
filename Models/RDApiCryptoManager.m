@@ -48,7 +48,7 @@
                                                         
                                                         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                                         
-                                                        NSLog(@"json %@",json);
+                                                       // NSLog(@"json %@",json);
                                                         
                                                         
                                                         if (json) {
@@ -91,7 +91,7 @@
                                                         
                                                         id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                                                         
-                                                        NSLog(@"json %@",json);
+                                                       // NSLog(@"json %@",json);
                                                         
                                                         
                                                         if (json) {
@@ -134,7 +134,7 @@
 
                                                     id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
 
-                                                        NSLog(@"json %@",json);
+                                                       // NSLog(@"json %@",json);
 
                                                     NSArray *favorites = @[@"BTCUSDT",@"ETHUSDT",@"ICXBTC",@"ICXETH",@"XRPETH"/*,@"XVGBTC"*/,@"DASHBTC",@"QTUMETH",@"LSKETH",@"LTCETH"];
 
@@ -245,7 +245,7 @@
 
                                                                     cryto.priceChangePercent = [NSString stringWithFormat:@"R%.2f", (priceChange)*12.6*QUANT*currentCryptoPrice];
                                                                     cryto.priceChangeDouble = (priceChange)*12.6*QUANT*currentCryptoPrice;
-                                                                     cryto.primaryInvestment = QUANT*primaryPriceForOne *12.6*currentCryptoPrice;
+                                                                     cryto.primaryPriceInBTC = QUANT*primaryPriceForOne *12.6*currentCryptoPrice;
                                                                        [cryptoRows addObject:cryto];
                                                                     cryto.currentExchangedValue = [cryto.price doubleValue]*QUANT*currentCryptoPrice;
                                                                 }
@@ -254,7 +254,7 @@
 
                                                         for (RDCryto *crypto in cryptoRows)
                                                         {
-                                                            [RDCryto logObject:crypto];
+                                                           // [RDCryto logObject:crypto];
                                                         }
                                                         [self postCurationRows:cryptoRows];
                                                     }
